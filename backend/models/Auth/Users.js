@@ -36,7 +36,11 @@ const AuthSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    products : [{type : mongoose.Schema.Types.ObjectId}]
+    products : [{
+        name :  {type : mongoose.Schema.Types.ObjectId},
+        quantity :{type : Number}
+
+    }]
 },{timestamps:true , versionKey:false})
 
 const AuthModel = mongoose.model("auth",AuthSchema)

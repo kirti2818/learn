@@ -4,6 +4,8 @@ const AdminLoginController = require("../../controllers/Admin/AdminLogin.Control
 const ApprovedUser = require("../../controllers/Admin/ApprovedUser.Controller");
 const IsAuth = require("../../middleware/IsAuth");
 const GetAllUsers = require("../../controllers/Users/getAllUsers");
+const AddWareHouse = require("../../controllers/Admin/AddWarehouse");
+const AddProductsToWareHouse = require("../../controllers/Admin/AddProduct");
 const AdminRoutes = express.Router();
 
 AdminRoutes.post("/signup",AdminSignupController)
@@ -11,5 +13,7 @@ AdminRoutes.post("/signup",AdminSignupController)
 
 AdminRoutes.use(IsAuth)
 AdminRoutes.patch("/updateUser/:id",ApprovedUser)
+AdminRoutes.post("/add_warehouse",AddWareHouse)
+AdminRoutes.post("/add_product",AddProductsToWareHouse)
 
 module.exports = AdminRoutes;

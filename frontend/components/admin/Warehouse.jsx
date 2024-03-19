@@ -1,10 +1,15 @@
+import MyDialog from "@/core/DynamicModal";
 import { Button, Spinner } from "@nextui-org/react";
 import dayjs from "dayjs";
-import React from "react";
+import React, { useState } from "react";
 import DataTable from "react-data-table-component";
+import AddWareHouse from "./AddWareHouse";
+import AddProductsInWareHouse from "./AddProductsInWareHouse";
 
 const Warehouse = () => {
   let isLoading = false;
+  const [OpenAddWareHouse, setOpenAddWareHouse] = useState(false);
+  const [OpenAddproduct, setOpenAddproduct] = useState(false);
   let data = [
     {
       name: "Warehouse 1",
@@ -39,7 +44,12 @@ const Warehouse = () => {
       name: "Action",
       selector: (row) => (
         <div className="flex gap-4 ">
-          <Button className="text-[12px]" size="sm" color="secondary">
+          <Button
+            onClick={() => setOpenAddproduct(true)}
+            className="text-[12px]"
+            size="sm"
+            color="secondary"
+          >
             Add Product
           </Button>
         </div>
@@ -48,9 +58,36 @@ const Warehouse = () => {
   ];
   return (
     <div className="h-full w-full p-10">
+      {OpenAddWareHouse && (
+        <MyDialog
+          width="w-[400px]"
+          heading="Add Ware House"
+          show={OpenAddWareHouse}
+          closeModal={() => setOpenAddWareHouse(false)}
+        >
+          <AddWareHouse onClose={()=>setOpenAddWareHouse(false)} />
+        </MyDialog>
+      )}
+      {OpenAddproduct && (
+        <MyDialog
+        width="w-[400px]"
+          heading="Add Product"
+          show={OpenAddproduct}
+          closeModal={() => setOpenAddproduct(false)}
+        >
+         <AddProductsInWareHouse  onClose={()=>setOpenAddWareHouse(false)}/>
+        </MyDialog>
+      )}
       <div className="flex justify-between ">
         <p className="text-[30px] font-semibold">Warehouse</p>
-        <Button color="secondary">Add</Button>
+        <Button
+          onClick={() => (
+            setOpenAddWareHouse(true), console.log(OpenAddWareHouse)
+          )}
+          color="secondary"
+        >
+          Add
+        </Button>
       </div>
       {/* table */}
       <div className="mt-10">
