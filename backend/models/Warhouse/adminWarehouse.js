@@ -8,6 +8,7 @@ const WareHouseSchema = new mongoose.Schema({
     },
     location : {
         type : String,
+        required : true
     },
     latitude : {
         type : String,

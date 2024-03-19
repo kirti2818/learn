@@ -6,7 +6,7 @@ let cronTask = null;
 let limit = 60;
 const Notification = async () => {
   try {
-    const filteredData = await ProductModel.find({ leftCount: { $lte: 0 } }).limit(limit);
+    const filteredData = await ProductModel.find({$and : [{ leftCount: { $lte: 0 } },{notified : false}]}).limit(limit);
     return { filteredData };
   } catch (error) {
     console.error("Error in Product Model:", error.message);
@@ -21,9 +21,9 @@ async function AddNotifications(filteredData) {
         const add = await NotificationModel.create({
           text: `${filteredData[i].name} is Out of stock`,
         });
-
+        const updateProduct = await ProductModel.findByIdAndUpdate(filteredData[i]?._id,{notified:true},{new : true})
         setTimeout(async () => {
-          const remainingData = await ProductModel.find({ leftCount: { $lte: 0 } })
+          const remainingData = await ProductModel.find({$and : [{ leftCount: { $lte: 0 } },{notified : false}]})
             .limit(60)
             .skip(0);
             AddNotifications(remainingData);

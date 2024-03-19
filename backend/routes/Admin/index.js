@@ -6,6 +6,9 @@ const IsAuth = require("../../middleware/IsAuth");
 const GetAllUsers = require("../../controllers/Users/getAllUsers");
 const AddWareHouse = require("../../controllers/Admin/AddWarehouse");
 const AddProductsToWareHouse = require("../../controllers/Admin/AddProduct");
+const GetAllWareHouse = require("../../controllers/Admin/GetAllWareHouses");
+const GetUsersOrderList = require("../../controllers/Admin/GetUsersOrderList");
+const ApproveOrder = require("../../controllers/Admin/ApproveOrder");
 const AdminRoutes = express.Router();
 
 AdminRoutes.post("/signup",AdminSignupController)
@@ -15,5 +18,8 @@ AdminRoutes.use(IsAuth)
 AdminRoutes.patch("/updateUser/:id",ApprovedUser)
 AdminRoutes.post("/add_warehouse",AddWareHouse)
 AdminRoutes.post("/add_product",AddProductsToWareHouse)
+AdminRoutes.get("/getAllWareHouse",GetAllWareHouse)
+AdminRoutes.get("/getUsersOrderList/:id",GetUsersOrderList)
+AdminRoutes.patch("/updateOrder/:id",ApproveOrder)
 
 module.exports = AdminRoutes;

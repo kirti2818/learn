@@ -1,8 +1,8 @@
 const ProductModel = require("../../models/Products/product.model");
 
-const GetAllProducts = async () => {
+const GetAllProducts = async (req,res) => {
   try {
-    const getAll = await ProductModel.find({ $gt: { leftCount: 0 } });
+    const getAll = await ProductModel.find();
     return res
       .status(200)
       .json({ message: "Get All Products", status: true, data: getAll });

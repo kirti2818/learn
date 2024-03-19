@@ -1,5 +1,4 @@
 import AdminSidebar from "@/components/admin/AdminSidebar";
-import UserOrderList from "@/components/admin/UserOrderList";
 import UserPanel from "@/components/admin/UserPanel";
 import Warehouse from "@/components/admin/Warehouse";
 import RedirectPrivatePages from "@/redirects/RedirectToPrivate";
@@ -7,21 +6,15 @@ import { jwtDecode } from "jwt-decode";
 import dynamic from "next/dynamic";
 import React from "react";
 import { useSelector } from "react-redux";
+import Products from "./products";
+import { useRouter } from "next/router";
+import { Button } from "@nextui-org/react";
 
-const Admin = () => {
-  //   const pathname = "warehouse";
-  const { navVal } = useSelector((store) => store.adminSlice);
-  console.log("navVal", navVal);
+const User = () => {
+const router = useRouter()
   return (
     <div className="">
-      <div className="flex">
-        <div className="w-[300px] min-h-screen ">
-          <AdminSidebar />
-        </div>
-        <div className="flex-1">
-          {navVal === "warehouse" ? <Warehouse /> :<UserPanel />}
-        </div>
-      </div>
+     <Button color="primary" onClick = {()=>router.push("/user/products")}>Go To Product Page</Button>
     </div>
   );
 };
@@ -50,6 +43,6 @@ export const getServerSideProps = async ({req}) => {
 };
 
 
-export default dynamic(() => Promise.resolve(Admin), { ssr: false });
+export default dynamic(() => Promise.resolve(User), { ssr: false });
 
 

@@ -1,5 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
+import { Button } from "@nextui-org/react";
 import { Fragment, useState } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 export default function DynamicModal({
   show = false,
@@ -7,11 +9,10 @@ export default function DynamicModal({
   openModal,
   children,
   heading,
-  width ="w-fit",
+  width = "w-fit",
 }) {
- 
   return (
-    <>  
+    <>
       <Transition appear show={show} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -38,10 +39,14 @@ export default function DynamicModal({
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel
-                 className={`${width} transform  overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}
-
+                  className={`${width} transform  overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}
                 >
-                {heading}
+                  <div className="flex justify-between">
+                    <p className="text-[20px] font-semibold">{heading}</p>
+                    <Button onClick={()=>closeModal()} isIconOnly color="danger">
+                      <RxCross2 />
+                    </Button>
+                  </div>
                   {children}
                 </Dialog.Panel>
               </Transition.Child>

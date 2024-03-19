@@ -1,3 +1,4 @@
+import DynamicModal from "@/core/DynamicModal";
 import useDeleteUser from "@/libs/mutations/admin/useDeleteUser";
 import useUpdateUser from "@/libs/mutations/admin/useUserUpdate";
 import useGetAllUsers from "@/libs/queries/useGetAllUsers";
@@ -6,6 +7,7 @@ import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
+import UserOrderList from "./UserOrderList";
 
 const UserPanel = () => {
   const [search, setSearch] = useState("");
@@ -25,12 +27,14 @@ const UserPanel = () => {
     isLoading: deleteUserLoading,
     isError: deleteUserError,
   } = useDeleteUser();
+  const [OpenUserOrder,setOpenUserOrder] = useState(false)
+  const [userId , setuserId] = useState("")
   console.log(getAllUsers);
   const columns = [
     {
       name: "Name",
       selector: (row) => (
-        <div className="hover:text-purple-400 duration-300 transition-all cursor-pointer">
+        <div onClick={()=>(setuserId(row?._id),setOpenUserOrder(true))} className="hover:text-purple-400 duration-300 transition-all cursor-pointer">
           {`${row.firstname} ${row.lastname}`}
         </div>
       ),
@@ -114,6 +118,9 @@ const UserPanel = () => {
   ];
   return (
     <div className="h-full w-full p-10">
+    {
+      OpenUserOrder && <DynamicModal closeModal={()=>setOpenUserOrder(false)} show={OpenUserOrder} openModal={OpenUserOrder} heading={"User Orders"}><UserOrderList userId={userId}/></DynamicModal>
+    }
       <div className="flex justify-between ">
         <p className="text-[30px] font-semibold">UserPanel</p>
         <Button color="secondary">Add</Button>

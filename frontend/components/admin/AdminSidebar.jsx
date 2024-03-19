@@ -8,7 +8,8 @@ import { IoIosNotifications } from "react-icons/io";
 
 const mapList = [
   { name: "Warehouse", val: "warehouse", icon: MdWarehouse },
-  { name: "UserPanel", val: "user_panel", icon: FaUsers },
+  { name: "User List", val: "user_panel", icon: FaUsers },
+  // { name: "User Orders", val: "user_order", icon: FaUsers },
 ];
 
 const AdminSidebar = () => {

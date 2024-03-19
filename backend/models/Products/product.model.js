@@ -23,6 +23,11 @@ const ProductSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    notified : {
+        type : Boolean,
+        required : "true",
+        default:false
+    }
   },
   { timestamps: true, versionKey: false }
 );
