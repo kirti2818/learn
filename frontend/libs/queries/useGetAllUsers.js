@@ -7,11 +7,9 @@ const useGetAllUsers = (queries)=>{
         queryKey : ["/getAllUsers",queries],
         queryFn : async()=>{
             let Query =""
-            for(const key in queries){
-                Query = Query+`${key}=${queries[key]}&`
-            }
+            
             console.log(Query);
-            const response = await api.get(`/users/getAllUsers?${Query}`)
+            const response = await api.get(`/users/getAllUsers?search=${queries}`)
             console.log(response)
             return response?.data?.data
         }

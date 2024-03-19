@@ -42,12 +42,12 @@ const UserPanel = () => {
     },
     {
       name: "phone",
-      selector: (row) => <div>7896541230</div>,
+      selector: (row) => <div>{row?.phone_number}</div>,
       width: "140px",
     },
     {
       name: "email",
-      selector: (row) => <div>user@gmail.com</div>,
+      selector: (row) => <div>{row?.email}</div>,
       width: "140px",
     },
     {
