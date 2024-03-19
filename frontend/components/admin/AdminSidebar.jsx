@@ -4,6 +4,7 @@ import { FaUsers } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
 import { MdWarehouse } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import { IoIosNotifications } from "react-icons/io";
 
 const mapList = [
   { name: "Warehouse", val: "warehouse", icon: MdWarehouse },
@@ -23,6 +24,8 @@ const AdminSidebar = () => {
           <GrUserAdmin className="h-10 w-10 text-purple-500" />
         </div>
         <p className="font-semibold text-[28px]">Admin</p>
+        <IoIosNotifications className="w-7 h-7"/>
+
       </div>
       {/* ui list  */}
       <div className="pl-4">

@@ -6,6 +6,7 @@ const connect = require("../config/db")
 const PORT = process.env.PORT;
 const cookie = require("cookie-parser");
 const AllRoutes = require("../routes");
+const {Notification} = require("../controllers/Notification/AddNotification")
 
 const corsOptions = {
     origin: [
