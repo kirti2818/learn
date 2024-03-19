@@ -8,9 +8,12 @@ const cookie = require("cookie-parser");
 const AllRoutes = require("../routes");
 
 const corsOptions = {
-    origin : ["http://localhost:3000"],
-    withCredentials : true
-}
+    origin: [
+      "http://localhost:3000",
+      
+    ],
+    credentials: true,
+  };
 app.use(cors(corsOptions))
 app.use(cookie())
 app.use(express.json())

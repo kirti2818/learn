@@ -28,12 +28,16 @@ const AuthSchema = new mongoose.Schema({
         type :Boolean,
         default : null
     },
-  
+    status : {
+        type : String,
+        enum : ["active","block"]
+    },
     password : {
         type : String,
         required : true
-    }
-})
+    },
+    products : [{type : mongoose.Schema.Types.ObjectId}]
+},{timestamps:true , versionKey:false})
 
 const AuthModel = mongoose.model("auth",AuthSchema)
 module.exports = AuthModel;
