@@ -123,7 +123,7 @@ const UserPanel = () => {
     }
       <div className="flex justify-between ">
         <p className="text-[30px] font-semibold">UserPanel</p>
-        <Button color="secondary">Add</Button>
+       
       </div>
       {/* table */}
       <div className="w-[300px] ">

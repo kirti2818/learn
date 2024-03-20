@@ -9,6 +9,8 @@ const AddProductsToWareHouse = require("../../controllers/Admin/AddProduct");
 const GetAllWareHouse = require("../../controllers/Admin/GetAllWareHouses");
 const GetUsersOrderList = require("../../controllers/Admin/GetUsersOrderList");
 const ApproveOrder = require("../../controllers/Admin/ApproveOrder");
+const GetAllNotifications = require("../../controllers/Notification/GetNotifications");
+const UpdateNotification = require("../../controllers/Notification/UpdateNotification");
 const AdminRoutes = express.Router();
 
 AdminRoutes.post("/signup",AdminSignupController)
@@ -21,5 +23,7 @@ AdminRoutes.post("/add_product",AddProductsToWareHouse)
 AdminRoutes.get("/getAllWareHouse",GetAllWareHouse)
 AdminRoutes.get("/getUsersOrderList/:id",GetUsersOrderList)
 AdminRoutes.patch("/updateOrder/:id",ApproveOrder)
+AdminRoutes.get("/getNotifications",GetAllNotifications)
+AdminRoutes.patch("/updateNotification",UpdateNotification)
 
 module.exports = AdminRoutes;

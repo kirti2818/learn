@@ -3,14 +3,18 @@ import DynamicModal from '@/core/DynamicModal';
 import useAddProductsInOrder from '@/libs/mutations/User/useAddProductsInOrder';
 import useGetAllProducts from '@/libs/queries/Users/useGetAllProducts'
 import { Button, Spinner } from '@nextui-org/react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 
 const Products = () => {
-    const {data : getAllProducts , isLoading : getAllProductsLoading ,isError : getAllProductsError , isSuccess : getAllProductsSuccess} = useGetAllProducts()
     const {mutate : AddProductInOrder} = useAddProductsInOrder()
     const [OpenOrderModal , setOpenOrderModal] = useState(false)
     const [productId , setProductId] = useState("")
+    const [location, setLocation] = useState(null);
+    let [isLoading, setIsLoading] = useState(true);
+    const {data : getAllProducts , isLoading : getAllProductsLoading ,isError : getAllProductsError , isSuccess : getAllProductsSuccess} = useGetAllProducts(location?.center)
+
+    console.log(location)
 
     const columns = [
         {
@@ -58,6 +62,32 @@ const Products = () => {
           ),
         },
       ];
+
+      useEffect(() => {
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              let obj = {
+                center: {
+                  lat: latitude,
+                  lng: longitude,
+                },
+                zoom: 11,
+              };
+              setLocation(obj);
+              setIsLoading(false);
+            },
+            (error) => {
+              console.error("Error getting location:", error.message);
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported.");
+        }
+      }, []);
+
   return (
     <div>
     {
@@ -83,7 +113,7 @@ const Products = () => {
       // paginationRowsPerPageOptions={[10, 20, 30, 50, 100]}
       noDataComponent={
         <div className="flex flex-col items-center justify-center p-4">
-          {getAllProductsLoading ? <Spinner /> : <p>No Products</p>}
+          {getAllProductsLoading ? <Spinner /> : <p>{(getAllProductsSuccess && getAllProducts?.length<=0)?"No Ware House Around You" : "No Products"}</p>}
         </div>
       }
     />
