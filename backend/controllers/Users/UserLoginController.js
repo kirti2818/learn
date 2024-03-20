@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const UserLoginController = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email)
   try {
     let cookieOption = {
       maxAge: 3 * 24 * 60 * 60 * 1000,

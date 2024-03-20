@@ -41,7 +41,7 @@ const Index = () => {
               <Input
                 variant="underlined"
                 size="sm"
-                type="email"
+                type="text"
                 onChange={onChange}
                 value={value}
                 label="Email"
